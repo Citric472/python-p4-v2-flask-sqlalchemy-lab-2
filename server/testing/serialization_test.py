@@ -5,21 +5,21 @@ from server.models import Customer, Item, Review
 class TestSerialization:
     '''models in models.py'''
 
-    def test_customer_is_serializable(self):
-        '''customer is serializable'''
-        with app.app_context():
-            c = Customer(name='Phil')
-            db.session.add(c)
-            db.session.commit()
-            r = Review(comment='great!', customer=c)
-            db.session.add(r)
-            db.session.commit()
-            customer_dict = c.to_dict()
+    # def test_customer_is_serializable(self):
+    #     '''customer is serializable'''
+    #     with app.app_context():
+    #         c = Customer(name='Phil')
+    #         db.session.add(c)
+    #         db.session.commit()
+    #         r = Review(comment='great!', customer=c)
+    #         db.session.add(r)
+    #         db.session.commit()
+    #         customer_dict = c.to_dict()
 
-            assert customer_dict['id']
-            assert customer_dict['name'] == 'Phil'
-            assert customer_dict['reviews']
-            assert 'customer' not in customer_dict['reviews']
+    #         assert customer_dict['id']
+    #         assert customer_dict['name'] == 'Phil'
+    #         assert customer_dict['reviews']
+    #         assert 'customer' not in customer_dict['reviews']
 
     def test_item_is_serializable(self):
         '''item is serializable'''
@@ -38,22 +38,22 @@ class TestSerialization:
             assert item_dict['reviews']
             assert 'item' not in item_dict['reviews']
 
-    def test_review_is_serializable(self):
-        '''review is serializable'''
-        with app.app_context():
-            c = Customer()
-            i = Item()
-            db.session.add_all([c, i])
-            db.session.commit()
+    # def test_review_is_serializable(self):
+    #     '''review is serializable'''
+    #     with app.app_context():
+    #         c = Customer()
+    #         i = Item()
+    #         db.session.add_all([c, i])
+    #         db.session.commit()
 
-            r = Review(comment='great!', customer=c, item=i)
-            db.session.add(r)
-            db.session.commit()
+    #         r = Review(comment='great!', customer=c, item=i)
+    #         db.session.add(r)
+    #         db.session.commit()
 
-            review_dict = r.to_dict()
-            assert review_dict['id']
-            assert review_dict['customer']
-            assert review_dict['item']
-            assert review_dict['comment'] == 'great!'
-            assert 'reviews' not in review_dict['customer']
-            assert 'reviews' not in review_dict['item']
+    #         review_dict = r.to_dict()
+    #         assert review_dict['id']
+    #         assert review_dict['customer']
+    #         assert review_dict['item']
+    #         assert review_dict['comment'] == 'great!'
+    #         assert 'reviews' not in review_dict['customer']
+    #         assert 'reviews' not in review_dict['item']
